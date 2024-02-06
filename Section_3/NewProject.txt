@@ -1,0 +1,10 @@
+run
+    -> npm install
+    -> npm run dev
+    -> npm run dev
+
+create
+    -> npx degit sveltejs/template my-svelte-projec
+    -> cd my-svelte-project
+    -> npm install
+    -> npm run dev

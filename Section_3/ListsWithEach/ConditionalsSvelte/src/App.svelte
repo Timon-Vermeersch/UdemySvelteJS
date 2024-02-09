@@ -9,25 +9,44 @@
 
   let createdContacts = []
 
-  function addContact(){
-    if (
+  function addContact() 
+{
+   
+  if (
       name.trim().length == 0 || 
       title.trim().length == 0 || 
       image.trim().length == 0 || 
-      description.trim().length == 0) 
-      {
-      formState = 'invalid'
+      description.trim().length == 0
+     ) 
+    {
+      formState = 'invalid';
       return;
     }
-formState = 'done';
-createdContacts = [...createdContacts,{
-  name: name, 
-  jobTitle:title , 
-  imageUrl: image , 
-  desc:description}];
 
-    
+  formState = 'done';
+  createdContacts = [...createdContacts, 
+  {
+    id : Math.random(),
+    name : name, 
+    jobTitle: title, 
+    imageUrl: image, 
+    desc: description
+  }];
+}
+
+
+  function deleteFirst()
+  {
+    createdContacts = createdContacts.slice(1);
   }
+
+  function deleteLast()
+  {
+    createdContacts = createdContacts.slice(0,-1)
+  }
+
+
+
 </script>
 
 <style>
@@ -57,6 +76,8 @@ createdContacts = [...createdContacts,{
 </div>
 
 <button on:click={addContact}>  Add Contact Card</button>
+<button on:click={deleteFirst}>Delete First</button>
+<button on:click={deleteLast}>Delete Last</button>
 
 
 
@@ -67,10 +88,14 @@ createdContacts = [...createdContacts,{
 {/if}
 
 
-{#each  createdContacts  as contact }
-<ContactCard 
-userName={contact.name} 
-jobTitle={contact.jobTitle} 
-description={contact.desc}
-userImage={contact.image} />
+{#each  createdContacts  as contact , index (contact.id)}
+  <h2>#{index + 1 }</h2>
+  <ContactCard 
+    
+    userName={contact.name} 
+    jobTitle={contact.jobTitle} 
+    description={contact.desc}
+    userImage={contact.image} />
+  {:else}
+    <p>Please add some contacts, none found</p>
 {/each}

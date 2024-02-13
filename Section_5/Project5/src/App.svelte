@@ -47,6 +47,14 @@
     }
     meetups = [newMeetup,...meetups ];
   }
+
+  function help (event)
+  {
+    title = event.target.value
+    console.log('HASWEJIFHDSEYUIFHSYHEFHISEFHUJISEF')
+    console.log(event)
+
+  }
 </script>
 
 <style>
@@ -71,7 +79,7 @@
         id = 'title'
         type = 'text' 
         value = {title} 
-        on:input= {event => (title = event.target.value)} />
+        on:input= {help} />
 
       <TextInput 
         id = 'subtitle' 
@@ -105,7 +113,7 @@
 
       <Button type='submit' caption= "Save" />
     </form>
-    <MeetupGrid {meetups}/>
+    <MeetupGrid {meetups} />
   </main>
 
 

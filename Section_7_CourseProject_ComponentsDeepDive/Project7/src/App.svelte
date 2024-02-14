@@ -17,7 +17,7 @@
       title: 'persona4r meetup' ,
       subtitle: 'Learn to play in 2 hours' ,
       description: 'In this meetup, we will have some experts like chie',
-      imageUrl: 'https://atlus.com/wp-content/uploads/2022/03/persona4.jpg',
+      imageUrl: 'https://i.redd.it/185xihbktbn21.jpg',
       contactEmail: 'code@test.com',
       adress: 'nerd Street 420, jeruzalem'
     },
@@ -26,7 +26,7 @@
       title: 'Persona5r meetup' ,
       subtitle: 'Learn to play in 2 hours' ,
       description: 'In this meetup, we will have some experts like Joker',
-      imageUrl: 'https://www.spriters-resource.com/resources/sheets/126/129650.png?updated=1586993323',
+      imageUrl: 'https://i.seadn.io/gae/2hDpuTi-0AMKvoZJGd-yKWvK4tKdQr_kLIpB_qSeMau2TNGCNidAosMEvrEXFO9G6tmlFlPQplpwiqirgrIPWnCKMvElaYgI-HiVvXc?auto=format&dpr=1&w=1000',
       contactEmail: 'code@test.com',
       adress: 'Epic straat 6969, 9000 Belgium'
     }

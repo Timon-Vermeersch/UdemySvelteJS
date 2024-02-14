@@ -12,7 +12,7 @@
     article {
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
       border-radius: 5px;
-      background: white;
+      background: rgba(211, 171, 171, 0.562);
       margin: 1rem;
     }
   
@@ -30,7 +30,7 @@
     .image img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: scale-down;
     }
   
     h1 {

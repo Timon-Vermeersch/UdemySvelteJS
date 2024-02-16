@@ -1,10 +1,10 @@
 <script>
-    export let controlType;
+    export let controlType = null;
     export let id;
     let idButCapitalised = id.charAt(0).toUpperCase() + id.slice(1);
-    export let rows;
+    export let rows = null;
     export let value;
-    export let type;
+    export let type = 'text';
 </script>
 
 <style>

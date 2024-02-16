@@ -4,46 +4,48 @@
   import MeetupGrid from "./Meetups/MeetupGrid.svelte";
   import TextInput from "./UI/TextInput.svelte";
   import Button from "./UI/Button.svelte";
-     let title = '';
-     let subtitle= '';
-     let imageUrl= '';
-     let description= '';
-     let adress= '';
-     let email= '';
+  import EditMeetup from "./Meetups/EditMeetup.svelte";
+
+
     let meetups = 
   [
     {
       id: 'm1',
-      title: 'persona4r meetup' ,
+      title: 'Persona4r meetup' ,
       subtitle: 'Learn to play in 2 hours' ,
       description: 'In this meetup, we will have some experts like chie',
       imageUrl: 'https://i.redd.it/185xihbktbn21.jpg',
       contactEmail: 'code@test.com',
-      adress: 'nerd Street 420, jeruzalem'
+      adress: 'Nerd Street 420, 9696 Jeruzalem',
+      isFavorite: false
     },
     {
       id: 'm2',
       title: 'Persona5r meetup' ,
-      subtitle: 'Learn to play in 2 hours' ,
+      subtitle: 'Learn to play in 4 hours' ,
       description: 'In this meetup, we will have some experts like Joker',
       imageUrl: 'https://i.seadn.io/gae/2hDpuTi-0AMKvoZJGd-yKWvK4tKdQr_kLIpB_qSeMau2TNGCNidAosMEvrEXFO9G6tmlFlPQplpwiqirgrIPWnCKMvElaYgI-HiVvXc?auto=format&dpr=1&w=1000',
       contactEmail: 'code@test.com',
-      adress: 'Epic straat 6969, 9000 Belgium'
+      adress: 'Epic Straat 6969, 9000 Belgium',
+      isFavorite: false
     }
   ];
 
-  function addMeetup()
+let editMode = 'x';
+
+  function addMeetup(event)
   {
+    console.log('FUCK MIJN LEVEN')
     const newMeetup =
     {
       id: Math.random().toString(),
       
-      title: title,
-      subtitle: subtitle,
-      description: description,
-      imageUrl: imageUrl,
-      contactEmail: email,
-      adress:  adress,
+      title: event.detail.title,
+      subtitle: event.detail.subtitle,
+      description: event.detail.description,
+      imageUrl: event.detail.imageUrl,
+      contactEmail: event.detail.email,
+      adress:  event.detail.adress,
     }
     meetups = [newMeetup,...meetups ];
   }
@@ -55,6 +57,29 @@
     console.log(event)
 
   }
+
+  function toggleFavorite(event) 
+  {
+    const id = event.detail;
+    const updateMeetup = {...meetups.find(m => m.id === id)};
+    updateMeetup.isFavorite = !updateMeetup.isFavorite;
+    const meetupIndex = meetups.findIndex(m => m.id ===id);
+    const updatedMeetups = [...meetups];
+    updatedMeetups[meetupIndex] = updateMeetup;
+    meetups = updatedMeetups;
+  }
+
+  function handleClick() {
+    if (editMode === 'x') {
+      editMode = 'add';
+    } else {
+      editMode = 'x';
+    }
+  }
+
+  function cancelEdit (){
+        editMode = null;
+    } 
 </script>
 
 <style>
@@ -63,57 +88,28 @@
   {
     margin-top: 5rem;
   }
-  form {
-    width: 30rem;
-    max-width: 90%;
-    margin: auto;
+  .meetup-controls
+  {
+    margin: 1rem;
+    padding-top: 1rem;
   }
+
 </style>
 
 
   <Header />
 
   <main>
-    <form on:submit|preventDefault="{addMeetup}"> 
-      <TextInput 
-        id = 'title'
-        type = 'text' 
-        value = {title} 
-        on:input= {help} />
+        <div class="meetup-controls">
 
-      <TextInput 
-        id = 'subtitle' 
-        type = 'text'
-        value = {subtitle} 
-        on:input= {event => (subtitle = event.target.value)} />
-
-      <TextInput 
-        id = 'adress' 
-        type = 'text'
-        value = {adress} 
-        on:input= {event => (adress = event.target.value)} />
-
-      <TextInput 
-        id = 'imageUrl' 
-        type = 'text'
-        value = {imageUrl} 
-        on:input= {event => (imageUrl = event.target.value)} />
-
-      <TextInput 
-        id = 'email' 
-        value = {email} 
-        type = 'email'
-        on:input= {event => (email = event.target.value)} />
-
-      <TextInput 
-        id = 'description' 
-        controlType = 'textarea'
-        value = {description} 
-        on:input= {event => (description = event.target.value)} />
-
-      <Button type='submit' caption= "Save" />
-    </form>
-    <MeetupGrid {meetups} />
+          <Button on:click={handleClick}>New Meetup</Button>
+          
+      </div>
+          
+      {#if editMode === 'add'}
+            <EditMeetup on:save="{addMeetup}" on:cancel={cancelEdit}/>
+          {/if}
+          <MeetupGrid {meetups} on:togglefavorite={toggleFavorite} />
   </main>
 
 

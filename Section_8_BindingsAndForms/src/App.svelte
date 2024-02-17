@@ -28,7 +28,7 @@ $: if (isValidEmail(enterEmail)){
       formIsvalid = false;
     }
 
-function setValue(event) {
+function setaValue(event) {
     val = event.target.value;
   }
 function saveData(){

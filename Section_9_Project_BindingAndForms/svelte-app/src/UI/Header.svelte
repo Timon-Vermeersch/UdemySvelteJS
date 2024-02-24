@@ -14,7 +14,7 @@
 
   h1 {
     color: white;
-    font-family: "Roboto Slab", serif;
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
   }
 </style>

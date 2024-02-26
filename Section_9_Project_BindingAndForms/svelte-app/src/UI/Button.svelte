@@ -4,7 +4,7 @@
     export let href = null;
     export let mode = null;
     export let color = null;
-
+    export let disabled = false;
 
 
 </script>
@@ -45,6 +45,7 @@ button:disabled:active {
   box-shadow: none;
   cursor: not-allowed;
 }
+
 
 .success {
   background: #01a129;
@@ -171,7 +172,7 @@ button:disabled:active {
     <slot />
   </a>
 {:else}
-  <button class="{mode} {color}" {type} on:click>
+  <button class="{mode} {color}" {type} on:click {disabled} >
     <slot />
   </button>
 {/if}

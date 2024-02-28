@@ -59,8 +59,9 @@ label {
 <div class = 'form-control'>
     <label for="{id}">{idButCapitalised}</label>
 {#if controlType === 'textarea'}
-    <textarea class:invalid="{!valid && touched}"rows='{rows}' id="{id}" value = {value}  on:input on:blur={() => touched = true}/>
-{:else}
+    <textarea class:invalid="{!valid && touched}"rows='{rows}' id="{id}" bind:value  on:input on:blur={() => touched = true}/>
+      {:else}
+      <!--                                                  bind:value is easier than value = {value} and can be used only because it doesnt have a type -->
     <input class:invalid="{!valid && touched}" type="{type}" id='{id}' value = {value} on:input on:blur={() => touched = true}/> 
 {/if}
 {#if validityMessage && !valid && touched}

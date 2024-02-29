@@ -25,8 +25,8 @@ const meetups = writable([
 
 const customMeetupsStore =  {
 
-    subscribe: meetups.subscribe,
-        addMeetup: (meetupData) => {
+  subscribe: meetups.subscribe,
+  addMeetup: (meetupData) => {
           const newMeetup = {
             ...meetupData,
             id: Math.random().toString(),
@@ -36,9 +36,24 @@ const customMeetupsStore =  {
             return [newMeetup, ...items];
           });
         },
+  
+  updateMeetup: (id,meetupData) => {
+            meetups.update(items => {
+              const meetupIndex = items.findIndex(i => i.id === id);
+              const updatedMeetup = {...meetups [meetupIndex] , ...meetupData};
+              const updatedMeetups = [...items];
+              updatedMeetups[meetupIndex] = updatedMeetup;
+              return updatedMeetups
+            });
+  },
 
+  removeMeetup: (id) => {
+            meetups.update(items => {
+                return items.filter(i => i.id !== id);
+            });
+          },
 
-      toggleFavorite: id => {
+ toggleFavorite: id => {
         console.log(`Toggling favorite for id: ${id}`);
           meetups.update(items => {
             const meetupIndex = items.findIndex(m => m.id === id);

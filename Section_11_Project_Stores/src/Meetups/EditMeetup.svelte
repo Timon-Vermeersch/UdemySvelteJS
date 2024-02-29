@@ -7,23 +7,28 @@
     import {isEmpty} from '../helpers/validation.js'
     import {isValidEmail} from '../helpers/validation.js'
 
+    export let id = null;
+    
      let title = '';
-     
-
      let subtitle= '';
-     
-
      let imageUrl= '';
-     
-
      let description= '';
-     
-
      let adress= '';
-     
-
      let email= '';
      
+     if (id) {
+    const unsubscribe = meetups.subscribe(items => {
+      const selectedMeetup = items.find(i => i.id === id);
+      title = selectedMeetup.title;
+      subtitle = selectedMeetup.subtitle;
+      adress = selectedMeetup.adress;
+      email = selectedMeetup.contactEmail;
+      description = selectedMeetup.description;
+      imageUrl = selectedMeetup.imageUrl;
+    });
+
+    unsubscribe();
+  }
 
      let formIsvalid = false
 
@@ -48,18 +53,26 @@
       adress:  adress,
     };
     
-    meetups.addMeetup(meetupData)
-      
-    
-      
-      dispatch("save");
+
+    if (id){
+      meetups.updateMeetup(id, meetupData)
+    } else {
+      meetups.addMeetup(meetupData);
+    }
+    dispatch("save");
+  
   }    
     function cancel(){
         dispatch('cancel')
     }
+
+    function deleteMeetup () {
+      meetups.removeMeetup(id);
+      dispatch('save')
+    };
+
 </script>
-
-
+<!-- -------------------------------------------------- -->
 <style>
   form {
     width: 100%;
@@ -68,9 +81,7 @@
   }
 
 </style>
-
-
-
+<!-- -------------------------------------------------- -->
 <Modal title = "EditMeetupData" on:cancel>
     <form on:submit|preventDefault="{submitForm}"> 
         <TextInput 
@@ -120,5 +131,8 @@
 <div slot = 'footer'>
     <Button type='button' mode = 'outline'on:click={cancel}>Cancel</Button>
     <Button type='button' disabled = {!formIsvalid} on:click={submitForm}>Submit</Button>
+    {#if id}
+    <Button type= 'button' on:click = {deleteMeetup}>Delete</Button>
+    {/if}
 </div>
 </Modal>

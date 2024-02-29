@@ -39,6 +39,7 @@ const customMeetupsStore =  {
 
 
       toggleFavorite: id => {
+        console.log(`Toggling favorite for id: ${id}`);
           meetups.update(items => {
             const meetupIndex = items.findIndex(m => m.id === id);
             if (meetupIndex === -1) return items; // If the item isn't found, do nothing

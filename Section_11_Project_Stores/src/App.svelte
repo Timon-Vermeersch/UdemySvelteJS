@@ -18,18 +18,7 @@ $:  loadedMeetups = meetups;
 
   function addMeetup(event)
   {
-    console.log('f in chat')
-    const meetupData ={
-    
-      title: event.detail.title,
-      subtitle: event.detail.subtitle,
-      description: event.detail.description,
-      imageUrl: event.detail.imageUrl,
-      contactEmail: event.detail.email,
-      adress:  event.detail.adress,
-    };
-    // meetups push dont work anymore
-    meetups.addMeetup(meetupData);
+;
 }
 
   function help (event)
@@ -40,12 +29,7 @@ $:  loadedMeetups = meetups;
 
   }
 
-  function toggleFavorite(event) {
-    const id = event.detail;
-    meetups.toggleFavorite(id);
-
-}
-
+  
   function handleClick() {
     if (editMode === 'x') {
       editMode = 'add';
@@ -86,7 +70,7 @@ $:  loadedMeetups = meetups;
       {#if editMode === 'add'}
             <EditMeetup on:save="{addMeetup}" on:cancel={cancelEdit}/>
           {/if}
-          <MeetupGrid meetups={$loadedMeetups} on:togglefavorite={toggleFavorite} />
+          <MeetupGrid meetups={$loadedMeetups}  />
   </main>
 
 

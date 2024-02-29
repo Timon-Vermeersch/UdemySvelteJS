@@ -1,6 +1,6 @@
 <script>
 
-    import MeetupItems from "./MeetupItems.svelte";
+    import MeetupItem from "./MeetupItem.svelte";
 
     export let meetups
     
@@ -24,7 +24,7 @@
 
 <section id="meetups">
     {#each meetups as meetup}
-      <MeetupItems
+      <MeetupItem
       id={meetup.id}
       title = {meetup.title}
       subtitle = {meetup.subtitle}
@@ -33,7 +33,7 @@
       adress = {meetup.adress}
       mail = {meetup.contactEmail}
       isFav = {meetup.isFavorite}
-      on:togglefavorite
+      
       />
     {/each}
   </section>  

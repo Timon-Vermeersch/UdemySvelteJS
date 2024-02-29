@@ -1,7 +1,9 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  console.log('MeetupItem script executed');
+  import meetups from './meetups-store.js'  ;
+  
   import Button from "../UI/Button.svelte";
-  import Badge from "../UI/Badge.svelte";
+  import Badge from '../UI/Badge.svelte';
 
   export let id;
   export let title;
@@ -12,14 +14,17 @@
   export let email;
   export let isFav;
 
-  const dispatch = createEventDispatcher();
+  function toggleFavorite(){
+    console.log('xd')
+    meetups.toggleFavorite(id)
+  }
 </script>
 
 <style>
   article {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     border-radius: 5px;
-    background: white;
+    background: rgba(211, 171, 171, 0.562);
     margin: 1rem;
   }
 
@@ -37,7 +42,7 @@
   .image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: scale-down;
   }
 
   h1 {
@@ -78,7 +83,7 @@
     <h1>
       {title}
       {#if isFav}
-        <Badge>FAVORITE</Badge>
+        <Badge> Kusje Van Jasper </Badge>
       {/if}
     </h1>
     <h2>{subtitle}</h2>
@@ -96,9 +101,12 @@
       mode="outline"
       color={isFav ? null : 'success'}
       type="button"
-      on:click={() => dispatch('togglefavorite', id)}>
+      on:click={toggleFavorite}>
       {isFav ? 'Unfavorite' : 'Favorite'}
     </Button>
     <Button type="button">Show Details</Button>
   </footer>
 </article>
+
+
+

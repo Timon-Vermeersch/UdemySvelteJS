@@ -43,7 +43,7 @@
   article {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     border-radius: 5px;
-    background: rgb(252, 221, 221);
+    background:#fafad257;
     margin: 1rem;
   }
 
